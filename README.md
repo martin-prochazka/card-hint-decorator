@@ -1,4 +1,4 @@
-# DuoCards Task
+# Card Hint Decorator
 
 ```shell
 npm install
