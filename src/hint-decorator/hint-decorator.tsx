@@ -1,11 +1,14 @@
 import { PREFIXES } from "./constants";
 import { Card } from "./types";
 
-const removePrefix = (word: string, prefix: string) =>
-  word.includes(prefix) ? word.replace(prefix, "") : null;
+const removePrefix = (text: string, prefix: string) => {
+  return text.toLowerCase().includes(prefix.toLowerCase())
+    ? text.replace(new RegExp(prefix, "ig"), "")
+    : null;
+};
 
-const removePrefixes = (word: string) =>
-  PREFIXES.map((prefix) => removePrefix(word, prefix)).filter(Boolean);
+const removePrefixes = (text: string) =>
+  PREFIXES.map((prefix) => removePrefix(text, prefix)).filter(Boolean);
 
 export const decorateCardHint = (card: Card) => {
   const { front, hint } = card;
@@ -14,7 +17,7 @@ export const decorateCardHint = (card: Card) => {
 
   const keywords = [front, ...removePrefixes(front)];
 
-  const regex = new RegExp(`\\b(${keywords.join("|")})(\\w*)\\b`, "gi");
+  const regex = new RegExp(`\\b(${keywords.join("|")})(\\w*)\\b`, "ig");
 
   const parts = [];
   let lastIndex = 0;
