@@ -8,4 +8,3 @@ export const CardSchema = z.object({
 export const CardsSchema = CardSchema.array();
 
 export type Card = z.infer<typeof CardSchema>;
-export type Cards = z.infer<typeof CardsSchema>;
